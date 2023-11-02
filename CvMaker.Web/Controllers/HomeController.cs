@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using CvMaker.Core.Models;
 using CvMaker.Core.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace CvMaker.Web.Controllers
 {
@@ -19,7 +20,8 @@ namespace CvMaker.Web.Controllers
 
         public IActionResult Index()
         {
-            var cvs = _cvService.Get();
+            var cvs = _cvService.Query()
+                .Include(cv => cv.Languages).ToList();
             var cvList = new CvListViewModel();
             cvList.CvItems = cvs.Select(cv => new CvItemModel
             {
@@ -28,7 +30,14 @@ namespace CvMaker.Web.Controllers
                 Name = cv.FirstName,
                 LastName = cv.LastName,
                 OtherName = cv.OtherName,
-                PhoneNumber = cv.PhoneNumber
+                PhoneNumber = cv.PhoneNumber,
+                LanguageKnowledge = cv.Languages.Select(l => new LanguageKnowledgeViewModel
+                {
+                    CurriculumVitaeId = cv.Id,
+                    Id = l.Id,
+                    Language = l.Language,
+                    LanguageLevel = l.LanguageLevel
+                }).ToList()
             }).ToList();
 
             return View(cvList);
@@ -49,14 +58,23 @@ namespace CvMaker.Web.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var cvEdit = _cvService.GetById(id);
+            var cvEdit = _cvService.QueryById(id)
+                .Include(cv => cv.Languages)
+                .SingleOrDefault();
             if (cvEdit != null)
             {
                 var model = new CvItemModel
                 {
                     Name = cvEdit.FirstName,
                     Email = cvEdit.Email,
-                    Id = cvEdit.Id
+                    Id = cvEdit.Id,
+                    LanguageKnowledge = cvEdit.Languages.Select(l => new LanguageKnowledgeViewModel
+                    {
+                        CurriculumVitaeId = cvEdit.Id,
+                        Id = l.Id,
+                        Language = l.Language,
+                        LanguageLevel = l.LanguageLevel
+                    }).ToList()
                 };
                 return View(model);
             }
@@ -72,6 +90,8 @@ namespace CvMaker.Web.Controllers
             {
                 cv.Email = cvItem.Email;
                 cv.FirstName = cvItem.Name;
+
+
                 _cvService.Update(cv);
             }
             return RedirectToAction("Index");

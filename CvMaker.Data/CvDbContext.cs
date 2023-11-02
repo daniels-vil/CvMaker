@@ -10,6 +10,8 @@ public class CvDbContext : DbContext
         
     }
 
-    private DbSet<CurriculumVitae> curriculumVitae { get; set; }
+    DbSet<CurriculumVitae> curriculumVitae { get; set; }
+    DbSet<LanguageKnowledge> languageKnowledge { get; set; }
+
 
 }

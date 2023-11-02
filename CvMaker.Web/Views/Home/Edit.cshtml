@@ -1,11 +1,12 @@
-﻿@model CvItemModel
+﻿@using CvMaker.Core.Enums
+@model CvItemModel
 
 @{
     ViewBag.Title = $"Edit {Model.Name} CV";
     Layout = "_Layout";
 }
 
-<h2>Edit</h2>
+<h2>@Model.Name CV details</h2>
 @using (Html.BeginForm("Edit", "Home", FormMethod.Post))
 {
     @Html.HiddenFor(m => m.Id)
@@ -13,9 +14,28 @@
         @Html.LabelFor(n => n.Name, "Name")
         @Html.TextBoxFor(n=> n.Name, new { @class ="form-control"})
     </div>
+    <div class="mb-3">
+        @Html.LabelFor(n => n.Email, "E-mail")
+        @Html.TextBoxFor(n=> n.Email, new { @class ="form-control"})
+    </div>
+
+    <div id="language_section_@Model.LanguageKnowledge.Count">
+    @for (var i = 0; i < Model.LanguageKnowledge.Count; i++)
+    {
         <div class="mb-3">
-            @Html.LabelFor(n => n.Email, "E-mail")
-            @Html.TextBoxFor(n=> n.Email, new { @class ="form-control"})
-            </div>
+            @Html.LabelFor(m => m.LanguageKnowledge[i].Language, "Language")
+            @Html.TextBoxFor(m => m.LanguageKnowledge[i].Language, new { @class ="form-control"})
+        </div>
+        
+        <div class="mb-3">
+            @Html.LabelFor(m => m.LanguageKnowledge, "Language")
+            <select asp-for="@Model.LanguageKnowledge[i].LanguageLevel" asp-items="Html.GetEnumSelectList<KnowledgeEnum>()" required>
+                <option value="" disabled selected hidden>Please select</option>
+            </select>
+        </div>
+    }
+    </div>
            <button type="submit" class="btn btn-primary">Update</button>
 }
+
+
