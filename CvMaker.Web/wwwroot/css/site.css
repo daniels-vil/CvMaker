@@ -18,8 +18,8 @@ html {
 body {
     margin-bottom: 60px;
     /* background: whitesmoke; */
-    background: rgb(34,193,195);
-    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(232,205,148,1) 100%);
+    background: rgb(54,48,98);
+    background: linear-gradient(0deg, rgba(54,48,98,1) 0%, rgba(245,232,199,1) 100%);
 }
 .nav-link {
     color: #333; /* Text color */
@@ -82,7 +82,7 @@ body {
 }
 
 .btn-unique_create {
-    background-color: #609c7b; /* Green */
+    background-color: #818FB4; /* Green */
     border: none;
     color: antiquewhite;
     padding: 12px 24px;
@@ -105,7 +105,7 @@ body {
     }
 
 .create_wrapper {
-    background: #98c9ac;
+    background: #435585;
     display: flex;
     justify-content: center;
     max-width: 500px;
@@ -124,6 +124,7 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 25px;
+    color: whitesmoke;
 
 }
 
@@ -136,14 +137,35 @@ body {
 }
 
 .cv_create_next_step_outer {
-    background-color: #e6f2ff;
-    border: solid 5px lightblue;
+    background-color: #435585;
+    border: solid 1px gray;
     border-radius: 20px;
     margin: auto;
     flex: auto;
     justify-content: center;
-    max-width: 700px;
+    max-width: 800px;
+    margin-top: 60px;
 }
+
+.cv_next_step_title h1 {
+    padding-top: 20px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 55px;
+    letter-spacing: 1px;
+    word-spacing: -0.6px;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: uppercase;
+    text-align: center;
+    color: antiquewhite;
+}
+
+.cv_create_next_step_inner .mb-3 {
+    color: white;
+}
+
 .cv_create_next_step_inner {
     padding-top: 20px;
     padding-bottom: 20px;

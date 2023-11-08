@@ -6,33 +6,36 @@
     ViewData["Title"] = "CreateNextStep";
 }
 
-<h1>Continue with your CV @Model.Name</h1>
+
 
 <div class="cv_create_next_step_outer">
     <div class="cv_create_next_step_inner">
-    @using (Html.BeginForm("CreateNextStep", "Cv", FormMethod.Post))
+        <div class="cv_next_step_title">
+            <h1>Welcome @Model.Name!</h1>
+        </div>
+        @using (Html.BeginForm("CreateNextStep", "Cv", FormMethod.Post))
         {
-            <div>
+            <div class="create_next_step_address">
                 @Html.HiddenFor(m => m.Id)
                 <div class="mb-3">
                     @Html.LabelFor(n => n.Address.City, "City")
-                    @Html.TextBoxFor(n=> n.Address.City, new { @class ="form-control"})
-                    @Html.ValidationMessageFor(n => n.Address.PostCode, "Please enter city", new { @class = "text-danger" })
+                    @Html.TextBoxFor(n => n.Address.City, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.Address.PostCode, "", new { @class = "text-danger" })
                 </div>
                 <div class="mb-3">
                     @Html.LabelFor(n => n.Address.PostCode, "Post code")
-                    @Html.TextBoxFor(n=> n.Address.PostCode, new { @class ="form-control"})
-                    @Html.ValidationMessageFor(n => n.Address.PostCode, "Please enter post code", new { @class = "text-danger" })
+                    @Html.TextBoxFor(n => n.Address.PostCode, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.Address.PostCode, "", new { @class = "text-danger" })
                 </div>
                 <div class="street_streetnumber">
-                    <div class="form-group inline-block">
+                    <div class="form-group inline-block mb-3">
                         @Html.LabelFor(n => n.Address.Street, "Street")
-                        @Html.TextBoxFor(n=> n.Address.Street, new { @class ="form-control"})
+                        @Html.TextBoxFor(n => n.Address.Street, new { @class = "form-control" })
                         @Html.ValidationMessageFor(n => n.Address.Street, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group inline-block ml-3">
+                    <div class="form-group inline-block ml-3 mb-3">
                         @Html.LabelFor(n => n.Address.StreetNumber, "Street number")
-                        @Html.TextBoxFor(n=> n.Address.StreetNumber, new { @class ="form-control"})
+                        @Html.TextBoxFor(n => n.Address.StreetNumber, new { @class = "form-control" })
                         @Html.ValidationMessageFor(n => n.Address.StreetNumber, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -68,9 +71,9 @@
                         <div class="skill-item">
                             <div class="mb-3">
                                 @Html.LabelFor(m => m.LanguageKnowledge[i].Language, "Language")
-                                @Html.TextBoxFor(m => m.LanguageKnowledge[i].Language, new { @class ="form-control"})
+                                @Html.TextBoxFor(m => m.LanguageKnowledge[i].Language, new { @class = "form-control" })
                             </div>
-        
+
                             <div class="mb-3">
                                 @Html.LabelFor(m => m.LanguageKnowledge, "Language")
                                 <select asp-for="@Model.LanguageKnowledge[i].LanguageLevel" asp-items="Html.GetEnumSelectList<KnowledgeEnum>()" required>
@@ -82,14 +85,47 @@
                 </div>
 
             </div>
-            <button type="submit" class="submit_button">Create!</button>
+
+            <div class="employment_section">
+                <div class="employment_container">
+                    @for (int i = 0; i < @Model.Employments.Count; i++)
+                    {
+                        <div class="employment_item">
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.Employments[i].NameOfCompany, "Name of the company")
+                                @Html.TextBoxFor(m => m.Employments[i].NameOfCompany, new { @class = "form-control" })
+                            </div>
+
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.Employments[i].JobPosition, "Job Position")
+                                @Html.TextBoxFor(m => m.Employments[i].JobPosition, new { @class = "form-control" })
+                            </div>
+                            
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.Employments[i].WorkLoad, "Work load")
+                                @Html.TextBoxFor(m => m.Employments[i].WorkLoad, new { @class = "form-control" })
+                            </div>
+
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.Employments[i].StartDate, "Start Date")
+                                @Html.TextBoxFor(m => m.Employments[i].StartDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                            </div>
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.Employments[i].EndDate, "End Date")
+                                @Html.TextBoxFor(m => m.Employments[i].EndDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="create_button_wrapper">
+                <button type="submit" class="btn btn-unique_create">Create!</button>
+
+            </div>
         }
     </div>
 </div>
-
-
-
-
 
 <script>
     document.getElementById("add-skill-btn").addEventListener("click", function () {

@@ -30,12 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <UpToDateCheckInput Remove="Views\Home\Edit.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Cv\Details.cshtml" />
-    <_ContentIncludedByDefault Remove="Views\Home\Edit.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

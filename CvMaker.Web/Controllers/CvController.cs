@@ -63,6 +63,7 @@ namespace CvMaker.Web.Controllers
             var cv = _mapper.Map<CvItemModel, CurriculumVitae>(cvItem);
             cv.Skills = new List<Skills> { new Skills() };
             cv.Languages = new List<LanguageKnowledge> { new LanguageKnowledge() };
+            cv.Employments = new List<Employment> { new Employment() };
             _cvService.Create(cv);
             var cvId = cv.Id;
 
