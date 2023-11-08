@@ -12,6 +12,8 @@ public class CvDbContext : DbContext
 
     DbSet<CurriculumVitae> curriculumVitae { get; set; }
     DbSet<LanguageKnowledge> languageKnowledge { get; set; }
-
-
+    DbSet<Education> education { get; set; }
+    DbSet<Employment> employment { get; set; }
+    DbSet<Skills> skills { get; set; }
+    DbSet<Address> address { get; set; }
 }

@@ -17,4 +17,12 @@ public class CurriculumVitae : Entity
     public string? Email { get; set; }
 
     public ICollection<LanguageKnowledge> Languages { get; set; } = new List<LanguageKnowledge>();
+
+    public ICollection<Skills> Skills { get; set; } = new List<Skills>();
+
+    public ICollection<Education> Educations { get; set; } = new List<Education>();
+
+    public ICollection<Employment> Employments { get; set; } = new List<Employment>();
+
+    public Address? Address { get; set; } = new Address();
 }

@@ -4,6 +4,7 @@ using CvMaker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CvMaker.Data.Migrations
 {
     [DbContext(typeof(CvDbContext))]
-    partial class CvDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231103174353_AddedSection")]
+    partial class AddedSection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,45 +23,6 @@ namespace CvMaker.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("CvMaker.Core.Models.Address", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("City")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<string>("Country")
-                        .HasMaxLength(70)
-                        .HasColumnType("nvarchar(70)");
-
-                    b.Property<int>("CurriculumVitaeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PostCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Street")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("StreetNumber")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CurriculumVitaeId")
-                        .IsUnique();
-
-                    b.ToTable("address");
-                });
 
             modelBuilder.Entity("CvMaker.Core.Models.CurriculumVitae", b =>
                 {
@@ -150,7 +113,7 @@ namespace CvMaker.Data.Migrations
                     b.Property<int>("CurriculumVitaeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("EndDate")
+                    b.Property<DateTime?>("DurationOfEmployment")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("JobPosition")
@@ -161,10 +124,8 @@ namespace CvMaker.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("WorkLoad")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
@@ -190,7 +151,7 @@ namespace CvMaker.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int?>("LanguageLevel")
+                    b.Property<int>("LanguageLevel")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -212,10 +173,12 @@ namespace CvMaker.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SkillDescription")
+                        .IsRequired()
                         .HasMaxLength(400)
                         .HasColumnType("nvarchar(400)");
 
                     b.Property<string>("SkillName")
+                        .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
 
@@ -226,21 +189,10 @@ namespace CvMaker.Data.Migrations
                     b.ToTable("skills");
                 });
 
-            modelBuilder.Entity("CvMaker.Core.Models.Address", b =>
-                {
-                    b.HasOne("CvMaker.Core.Models.CurriculumVitae", "CurriculumVitae")
-                        .WithOne("Address")
-                        .HasForeignKey("CvMaker.Core.Models.Address", "CurriculumVitaeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CurriculumVitae");
-                });
-
             modelBuilder.Entity("CvMaker.Core.Models.Education", b =>
                 {
                     b.HasOne("CvMaker.Core.Models.CurriculumVitae", "CurriculumVitae")
-                        .WithMany("Educations")
+                        .WithMany()
                         .HasForeignKey("CurriculumVitaeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -251,7 +203,7 @@ namespace CvMaker.Data.Migrations
             modelBuilder.Entity("CvMaker.Core.Models.Employment", b =>
                 {
                     b.HasOne("CvMaker.Core.Models.CurriculumVitae", "CurriculumVitae")
-                        .WithMany("Employments")
+                        .WithMany()
                         .HasForeignKey("CurriculumVitaeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -273,7 +225,7 @@ namespace CvMaker.Data.Migrations
             modelBuilder.Entity("CvMaker.Core.Models.Skills", b =>
                 {
                     b.HasOne("CvMaker.Core.Models.CurriculumVitae", "CurriculumVitae")
-                        .WithMany("Skills")
+                        .WithMany()
                         .HasForeignKey("CurriculumVitaeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -283,15 +235,7 @@ namespace CvMaker.Data.Migrations
 
             modelBuilder.Entity("CvMaker.Core.Models.CurriculumVitae", b =>
                 {
-                    b.Navigation("Address");
-
-                    b.Navigation("Educations");
-
-                    b.Navigation("Employments");
-
                     b.Navigation("Languages");
-
-                    b.Navigation("Skills");
                 });
 #pragma warning restore 612, 618
         }

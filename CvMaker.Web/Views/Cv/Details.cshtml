@@ -1,0 +1,56 @@
+﻿@using Microsoft.DotNet.Scaffolding.Shared.Project
+@model CvItemModel
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<div class="outer_cv_page">
+    <div class="inner_cv_page">
+        <div>
+            <div class="full_name_cvdetails">
+                <h2 id="fullname">
+                    CV information about @Model.FullName()
+                </h2>
+            </div>
+            <div class="avatar_photos">
+                <img class="MaleFemalePhoto" src="https://i.stack.imgur.com/FJ65f.png"/>
+            </div>
+            <div>
+                <section class="cv_details">
+                    <p>E-mail address: @Model.Email</p>
+                    <p>Phone number: @Model.PhoneNumber</p>
+                    <p>Address: @Model.FullAddress()</p>
+                </section>
+            </div>
+            <div class="languages">
+                @if (Model.LanguageKnowledge.Count > 0)
+                {
+                    <p style="font-weight: bold">Languages</p>
+                    @for (int i = 0; i < Model.LanguageKnowledge.Count; i++)
+                    {
+                        <p>@Model.LanguageKnowledge[i].Language - @Model.LanguageKnowledge[i].LanguageLevel</p>
+                    }
+                }
+            </div>
+            <div class="cv_skills">
+                @for (int i = 0; i < Model.Skills.Count; i++)
+                {
+                    <p>@Model.Skills[i].SkillName</p>
+                    <p>@Model.Skills[i].SkillDescription</p>
+                }
+            </div>
+            <div class="cv_details">
+                <p style="font-weight: bold">Work Experience</p>
+                @for (int i = 0; i < Model.Employments.Count; i++)
+                {
+                    <p>@Model.Employments[i].NameOfCompany</p>
+                    <p>@Model.Employments[i].JobPosition</p>
+                    <p>@Model.Employments[i].WorkLoad</p>
+                    <p>@Model.Employments[i].StartDate</p>
+                    <p>@Model.Employments[i].EndDate</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

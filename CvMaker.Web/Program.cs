@@ -1,7 +1,9 @@
+using AutoMapper;
 using CvMaker.Core.Models;
 using CvMaker.Core.Services;
 using CvMaker.Data;
 using CvMaker.Services;
+using CvMaker.Web.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace CvMaker.Web
@@ -17,11 +19,16 @@ namespace CvMaker.Web
             builder.Services.AddDbContext<CvDbContext>
             (options => options.UseSqlServer
                 (builder.Configuration.GetConnectionString("cvDb")));
-
+            var mapper = AutoMapperConfig.Configure();
+            builder.Services.AddSingleton(mapper);
             builder.Services.AddTransient<IDbService, DbService>();
             builder.Services.AddTransient
                 <IEntityService<CurriculumVitae>, EntityService<CurriculumVitae>>();
+            builder.Services.AddScoped<ICurriculumVitaeService, CurriculumVitaeService>();
+
+
             
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

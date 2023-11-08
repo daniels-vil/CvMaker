@@ -1,0 +1,94 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using System.Diagnostics.Eventing.Reader
+@model CvListViewModel
+@{
+    ViewBag.Title = $"Look at all available CV`s";
+    Layout = "_Layout";
+}
+<div>
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome, here is a list of available CV`s</h1>
+    </div>
+    <div class="form-group">
+        <label for="searchName">Search by Name:</label>
+        <input type="text" class="form-control" id="searchName">
+    </div>
+    @if (Model.CvItems.Any())
+    {
+        <div style="text-align:center" class="list_table">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>Phone number</th>
+                    <th>E-mail</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var cv in Model.CvItems)
+                {
+                    <tr>
+                        <td>
+                            @cv.Id
+                        </td>
+                        <td>
+                            @if (cv.OtherName != null)
+                            {
+                                @cv.Name @(" " + cv.OtherName)
+                            }
+                            else
+                            {
+                                @cv.Name
+                            }
+                        </td>
+                        <td>
+                            @cv.LastName
+                        </td>
+                        <td>
+                            @cv.PhoneNumber
+                        </td>
+                        <td>
+                            @cv.Email
+                        </td>
+                        <td>
+                            @using (Html.BeginForm("Delete", "Home", FormMethod.Post))
+                            {
+                                <input type="hidden" name="id" value="@cv.Id" />
+                                <input id="Submit" type="submit" value="Delete" class="btn btn-danger" />
+                            }
+    
+                            @using (Html.BeginForm("Edit", "Home", FormMethod.Get))
+                            {
+                                <input type="hidden" name="id" value="@cv.Id" />
+                                <input id="Submit" type="submit" value="Edit" class="btn btn-info" />
+                            }
+
+                            @using (Html.BeginForm("Details", "Cv", FormMethod.Get))
+                            {
+                                <input type="hidden" name="id" value="@cv.Id" />
+                                <input id="Submit" type="submit" value="Details" class="btn btn-dark" />
+                            }
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div>
+            <span class="alert alert-warning">No items found</span>
+        </div>
+    }
+
+
+</div>
+
+<script>
+   
+</script>

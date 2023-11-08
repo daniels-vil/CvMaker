@@ -1,0 +1,137 @@
+﻿@using Microsoft.EntityFrameworkCore
+@using CvMaker.Core.Enums
+@model CvMaker.Web.Models.CvItemModel
+
+@{
+    ViewData["Title"] = "CreateNextStep";
+}
+
+<h1>Continue with your CV @Model.Name</h1>
+
+<div class="cv_create_next_step_outer">
+    <div class="cv_create_next_step_inner">
+    @using (Html.BeginForm("CreateNextStep", "Cv", FormMethod.Post))
+        {
+            <div>
+                @Html.HiddenFor(m => m.Id)
+                <div class="mb-3">
+                    @Html.LabelFor(n => n.Address.City, "City")
+                    @Html.TextBoxFor(n=> n.Address.City, new { @class ="form-control"})
+                    @Html.ValidationMessageFor(n => n.Address.PostCode, "Please enter city", new { @class = "text-danger" })
+                </div>
+                <div class="mb-3">
+                    @Html.LabelFor(n => n.Address.PostCode, "Post code")
+                    @Html.TextBoxFor(n=> n.Address.PostCode, new { @class ="form-control"})
+                    @Html.ValidationMessageFor(n => n.Address.PostCode, "Please enter post code", new { @class = "text-danger" })
+                </div>
+                <div class="street_streetnumber">
+                    <div class="form-group inline-block">
+                        @Html.LabelFor(n => n.Address.Street, "Street")
+                        @Html.TextBoxFor(n=> n.Address.Street, new { @class ="form-control"})
+                        @Html.ValidationMessageFor(n => n.Address.Street, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group inline-block ml-3">
+                        @Html.LabelFor(n => n.Address.StreetNumber, "Street number")
+                        @Html.TextBoxFor(n=> n.Address.StreetNumber, new { @class ="form-control"})
+                        @Html.ValidationMessageFor(n => n.Address.StreetNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="skills_section">
+                <div class="skill_button">
+                    <button type="button" id="add-skill-btn">Add more skills</button>
+                </div>
+                <div id="skills-container">
+                    @for (int i = 0; i < Model.Skills.Count; i++)
+                    {
+                        <div class="mb-3">
+                            <div>
+                                @Html.LabelFor(n => n.Skills[i].SkillName, "Skill name")
+                                @Html.TextBoxFor(n => n.Skills[i].SkillName, new { @class = "form-control" })
+                            </div>
+                            <div>
+                                @Html.LabelFor(n => n.Skills[i].SkillDescription, "Please describe your skill")
+                                @Html.TextBoxFor(n => n.Skills[i].SkillDescription, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <div class="languages_section">
+                <div class="language_button">
+                    <button type="button" id="add-language-btn">Add more languages</button>
+                </div>
+                <div id="languages_container">
+                    @for (int i = 0; i < Model.LanguageKnowledge.Count; i++)
+                    {
+                        <div class="skill-item">
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.LanguageKnowledge[i].Language, "Language")
+                                @Html.TextBoxFor(m => m.LanguageKnowledge[i].Language, new { @class ="form-control"})
+                            </div>
+        
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.LanguageKnowledge, "Language")
+                                <select asp-for="@Model.LanguageKnowledge[i].LanguageLevel" asp-items="Html.GetEnumSelectList<KnowledgeEnum>()" required>
+                                    <option value="" disabled selected hidden>Please select</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+            </div>
+            <button type="submit" class="submit_button">Create!</button>
+        }
+    </div>
+</div>
+
+
+
+
+
+<script>
+    document.getElementById("add-skill-btn").addEventListener("click", function () {
+        var container = document.getElementById("skills-container");
+        var newIndex = container.children.length;
+        var newSkillItem = document.createElement("div");
+        newSkillItem.className = "skill-item";
+        newSkillItem.innerHTML = `<div class="mb-3">
+                                    <div>
+                                    <label for="Skills_${newIndex}__SkillName">Skill name</label>
+                                    <input type="text" id="Skills_${newIndex}__SkillName" name="Skills[${newIndex}].SkillName" class="form-control" />
+                                  </div>
+                                  <div>
+                                    <label for="Skills_${newIndex}__SkillDescription">Please describe your skill</label>
+                                    <input type="text" id="Skills_${newIndex}__SkillDescription" name="Skills[${newIndex}].SkillDescription" class="form-control" />
+                                  </div>
+                                      </div>`;
+        container.appendChild(newSkillItem);
+    });
+</script>
+
+                                    
+<script>
+    document.getElementById("add-language-btn").addEventListener("click", function () {
+        var container = document.getElementById("languages-container");
+        var newIndex = container.children.length;
+        var newLanguageItem = document.createElement("div");
+        newLanguageItem.className = "language-item";
+        newLanguageItem.innerHTML = `<div class="mb-3">
+                                        <label for="LanguageKnowledge_${newIndex}__Language">Language</label>
+                                        <input type="text" id="LanguageKnowledge_${newIndex}__Language" name="LanguageKnowledge[${newIndex}].Language" class="form-control" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="LanguageKnowledge_${newIndex}__LanguageLevel">Language Level</label>
+                                        <select id="LanguageKnowledge_${newIndex}__LanguageLevel" name="LanguageKnowledge[${newIndex}].LanguageLevel" class="form-control" required>
+                                            <option value="" disabled selected hidden>Please select</option>
+                                            <option value="Beginner">Beginner</option>
+                                            <option value="Intermediate">Intermediate</option>
+                                            <option value="Excellent">Excellent</option>
+                                                <option value="Native">Native</option>
+                                        </select>
+                                    </div>`;
+        container.appendChild(newLanguageItem);
+    });
+</script>

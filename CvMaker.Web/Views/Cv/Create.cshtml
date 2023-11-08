@@ -1,0 +1,83 @@
+﻿@using CvMaker.Core.Enums
+@model CvMaker.Web.Models.CvItemModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+
+<hr />
+<div class="create_wrapper">
+    <div class="create_cv_content">
+        <div class="create_cv_title">
+            <h1>Lets begin!</h1>
+        </div>
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" required placeholder="Jane"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label">Last Name</label>
+                <input asp-for="LastName" class="form-control" required placeholder="Doe"/>
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" required placeholder="jane.doe@gmail.com"/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherName" class="control-label">Other Name</label>
+                <input asp-for="OtherName" class="form-control"/>
+                <span asp-validation-for="OtherName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" required placeholder="example: +371 00000000"/>
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Address.Country" class="control-label">Country</label>
+                <input asp-for="Address.Country" class="form-control" id="address.country" required placeholder="Moroco"/>
+            </div>
+
+            <div class="create_button_wrapper">
+                <input type="submit" value="Next step" class="btn btn-unique_create"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="List">Back to List</a>
+</div>
+
+@* <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> *@
+@* <script> *@
+@*     $(document).ready(function () { *@
+@*         var languageIndex = @((Model != null && Model.LanguageKnowledge != null) ? Model.LanguageKnowledge.Count : 0); *@
+@* *@
+@*         $('#addLanguageButton').click(function () { *@
+@*             var languageHtml = ` *@
+@*                     <div class="mb-3"> *@
+@*                         <label asp-for="LanguageKnowledge[${languageIndex}].Language" class="control-label">Language</label> *@
+@*                         <input asp-for="LanguageKnowledge[${languageIndex}].Language" class="form-control" /> *@
+@*                     </div> *@
+@*                     <div class="mb-3"> *@
+@*                         <label asp-for="LanguageKnowledge[${languageIndex}].LanguageLevel" class="control-label">Language Level</label> *@
+@*                         <select asp-for="LanguageKnowledge[${languageIndex}].LanguageLevel" asp-items="Html.GetEnumSelectList<KnowledgeEnum>()" class="form-control" required> *@
+@*                             <option value="" disabled selected hidden>Please select language level</option> *@
+@*                         </select> *@
+@*                     </div> *@
+@*                 `; *@
+@* *@
+@*             $('#addLanguageButton').before(languageHtml); *@
+@*             languageIndex++; *@
+@*         }); *@
+@*     }); *@
+@* </script> *@

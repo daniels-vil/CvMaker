@@ -5,11 +5,13 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CvMaker.Web", "CvMaker.Web\CvMaker.Web.csproj", "{348A1860-5C9D-432C-AF98-AC447AD2E3EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CvMaker.Core", "CvMaker.Core\CvMaker.Core.csproj", "{0D7CCF12-1BDF-45F0-86DC-F79F9B088286}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CvMaker.Core", "CvMaker.Core\CvMaker.Core.csproj", "{0D7CCF12-1BDF-45F0-86DC-F79F9B088286}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CvMaker.Services", "CvMaker.Services\CvMaker.Services.csproj", "{A89EAB34-3714-4FD6-8F44-876475B2F4F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CvMaker.Services", "CvMaker.Services\CvMaker.Services.csproj", "{A89EAB34-3714-4FD6-8F44-876475B2F4F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CvMaker.Data", "CvMaker.Data\CvMaker.Data.csproj", "{0E98ACB2-AC96-4E02-B919-A62FA93F3216}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CvMaker.Data", "CvMaker.Data\CvMaker.Data.csproj", "{0E98ACB2-AC96-4E02-B919-A62FA93F3216}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cv.Testss", "Cv.Testss\Cv.Testss.csproj", "{D156A396-0E5A-4ABC-BC0D-67B8858AF4F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0E98ACB2-AC96-4E02-B919-A62FA93F3216}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E98ACB2-AC96-4E02-B919-A62FA93F3216}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E98ACB2-AC96-4E02-B919-A62FA93F3216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D156A396-0E5A-4ABC-BC0D-67B8858AF4F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D156A396-0E5A-4ABC-BC0D-67B8858AF4F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D156A396-0E5A-4ABC-BC0D-67B8858AF4F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D156A396-0E5A-4ABC-BC0D-67B8858AF4F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

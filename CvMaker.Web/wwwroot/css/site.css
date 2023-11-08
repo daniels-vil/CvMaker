@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+
 html {
   font-size: 14px;
 }
 
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 18px;
   }
 }
 
@@ -14,6 +16,225 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
-  background-color: azure;
+    margin-bottom: 60px;
+    /* background: whitesmoke; */
+    background: rgb(34,193,195);
+    background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(232,205,148,1) 100%);
+}
+.nav-link {
+    color: #333; /* Text color */
+    font-weight: bold; /* Bold font weight */
+    text-decoration: none; /* Remove underline from links */
+    margin-right: 20px; /* Optional: Add margin between nav items */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.nav-link:hover {
+    color: #007bff; /* Change text color to a different color on hover */
+}
+.outer_cv_page {
+    background-color: whitesmoke;
+    width: 800px;
+    height: 1000px;
+    flex: auto;
+    margin: auto;
+    border: 3px solid #d3e0e8;
+    border-style: ridge;
+}
+
+.outer_cv_page .inner_cv_page {
+    margin-left: 30px;
+    margin-top: 15px;
+    margin-right: 20px;
+}
+
+.full_name_cvdetails {
+    text-align: center;
+    padding-top: 25px;
+}
+
+.avatar_photos .MaleFemalePhoto {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    float: right;
+    
+}
+
+.cv_details p {
+    line-height: 0.5;
+    font-size: 20px;
+}
+.cv_details {
+    margin-top: 60px;
+}
+
+.languages p {
+    line-height: 0.5;
+    flex: auto;
+}
+
+/* button for create */
+
+.create_button_wrapper {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.btn-unique_create {
+    background-color: #609c7b; /* Green */
+    border: none;
+    color: antiquewhite;
+    padding: 12px 24px;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid #304238;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    font-size: 28px;
+}
+
+    .btn-unique_create:hover {
+        background-color: #dbdbc8;
+        color: #333333;
+    }
+
+.create_wrapper {
+    background: #98c9ac;
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    border: solid 1px grey;
+    margin: auto;
+    flex: auto;
+    border-radius: 40px;
+}
+
+.create_cv_content {
+    width: 400px; /* Set your specific width */
+    height: 800px; /* Set your specific height */
+    padding-top: 30px;
+}
+.create_cv_content .form-group .control-label{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 25px;
+
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.ml-3 {
+    margin-left: 15px; /* Adjust the margin value as needed */
+}
+
+.cv_create_next_step_outer {
+    background-color: #e6f2ff;
+    border: solid 5px lightblue;
+    border-radius: 20px;
+    margin: auto;
+    flex: auto;
+    justify-content: center;
+    max-width: 700px;
+}
+.cv_create_next_step_inner {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.cv_create_next_step_inner .mb-3 {
+    font-size: 25px;
+}
+
+.street_streetnumber {
+    font-size: 25px;
+}
+
+.submit_button {
+    width: 100%;
+    height: 55px;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    transition: background-color 0.5s ease;
+    font-size: 27px;
+}
+.submit_button:hover {
+    background-color: lightblue; 
+}
+
+.cat_picture_container {
+    max-width: 500px;
+    max-height: 500px;
+    overflow: hidden; /* Hide overflow content */
+    background-color: white; /* Set the background color to white for borders */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.cat_picture {
+    width: auto;
+    height: auto;
+}
+
+.web_title {
+    padding: 30px;
+    border-radius: 49% 51% 32% 68%/56% 57% 43% 44%;
+    box-shadow: 12px 15px 18px 3px rgba(0,0,0,0.43);
+    -webkit-box-shadow: 1px 15px 5px 3px rgba(0,0,0,0.43);
+    -moz-box-shadow: 12px 15px 18px 3px rgba(0,0,0,0.43);
+}
+
+    .web_title h1 {
+        font-size: 90px;
+        text-align: center;
+        color: whitesmoke;
+    }
+
+.cat_picture_outer {
+    margin-top: 300px;
+}
+
+.front_page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    height: 100vh; 
+    }
+
+.create_cv_title h1{
+    padding-top: 20px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 55px;
+    letter-spacing: 1px;
+    word-spacing: -0.6px;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: uppercase;
+    text-align: center;
+    color: antiquewhite;
+
+}
+
+.list_table .table {
+    background-color: rgba(250, 209, 161,0.2);
+    justify-content: center;
+}
+
+.list_table td {
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
 }

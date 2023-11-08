@@ -52,7 +52,7 @@ namespace CvMaker.Web.Controllers
                 _cvService.Delete(cvToDelete);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("List","Cv");
         }
 
         [HttpGet]
@@ -90,8 +90,8 @@ namespace CvMaker.Web.Controllers
             {
                 cv.Email = cvItem.Email;
                 cv.FirstName = cvItem.Name;
-
-
+        
+        
                 _cvService.Update(cv);
             }
             return RedirectToAction("Index");
