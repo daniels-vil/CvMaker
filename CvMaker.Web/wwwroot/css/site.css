@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wght@8..144,200');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
 
 html {
   font-size: 14px;
@@ -17,115 +21,25 @@ html {
 
 body {
     margin-bottom: 60px;
-    /* background: whitesmoke; */
     background: rgb(54,48,98);
     background: linear-gradient(0deg, rgba(54,48,98,1) 0%, rgba(245,232,199,1) 100%);
 }
 .nav-link {
-    color: #333; /* Text color */
-    font-weight: bold; /* Bold font weight */
-    text-decoration: none; /* Remove underline from links */
-    margin-right: 20px; /* Optional: Add margin between nav items */
-    transition: color 0.3s ease; /* Smooth color transition on hover */
+    color: #333; 
+    font-weight: bold;
+    text-decoration: none; 
+    margin-right: 20px; 
+    transition: color 0.3s ease; 
 }
 
 .nav-link:hover {
-    color: #007bff; /* Change text color to a different color on hover */
-}
-.outer_cv_page {
-    background-color: whitesmoke;
-    width: 800px;
-    height: 1000px;
-    flex: auto;
-    margin: auto;
-    border: 3px solid #d3e0e8;
-    border-style: ridge;
+    color: #007bff; 
 }
 
-.outer_cv_page .inner_cv_page {
-    margin-left: 30px;
-    margin-top: 15px;
-    margin-right: 20px;
-}
-
-.full_name_cvdetails {
-    text-align: center;
-    padding-top: 25px;
-}
-
-.avatar_photos .MaleFemalePhoto {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    float: right;
-    
-}
-
-.cv_details p {
-    line-height: 0.5;
-    font-size: 20px;
-}
-.cv_details {
-    margin-top: 60px;
-}
 
 .languages p {
     line-height: 0.5;
     flex: auto;
-}
-
-/* button for create */
-
-.create_button_wrapper {
-    text-align: center;
-    padding-top: 20px;
-}
-
-.btn-unique_create {
-    background-color: #818FB4; /* Green */
-    border: none;
-    color: antiquewhite;
-    padding: 12px 24px;
-    text-align: center;
-    width: 100%;
-    text-decoration: none;
-    display: inline-block;
-    margin: 4px 2px;
-    transition-duration: 0.5s;
-    cursor: pointer;
-    border-radius: 8px;
-    border: 2px solid #304238;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    font-size: 28px;
-}
-
-    .btn-unique_create:hover {
-        background-color: #dbdbc8;
-        color: #333333;
-    }
-
-.create_wrapper {
-    background: #435585;
-    display: flex;
-    justify-content: center;
-    max-width: 500px;
-    border: solid 1px grey;
-    margin: auto;
-    flex: auto;
-    border-radius: 40px;
-}
-
-.create_cv_content {
-    width: 400px; /* Set your specific width */
-    height: 800px; /* Set your specific height */
-    padding-top: 30px;
-}
-.create_cv_content .form-group .control-label{
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 25px;
-    color: whitesmoke;
-
 }
 
 .inline-block {
@@ -133,64 +47,7 @@ body {
 }
 
 .ml-3 {
-    margin-left: 15px; /* Adjust the margin value as needed */
-}
-
-.cv_create_next_step_outer {
-    background-color: #435585;
-    border: solid 1px gray;
-    border-radius: 20px;
-    margin: auto;
-    flex: auto;
-    justify-content: center;
-    max-width: 800px;
-    margin-top: 60px;
-}
-
-.cv_next_step_title h1 {
-    padding-top: 20px;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 55px;
-    letter-spacing: 1px;
-    word-spacing: -0.6px;
-    font-weight: 700;
-    text-decoration: none solid rgb(68, 68, 68);
-    font-style: normal;
-    font-variant: small-caps;
-    text-transform: uppercase;
-    text-align: center;
-    color: antiquewhite;
-}
-
-.cv_create_next_step_inner .mb-3 {
-    color: white;
-}
-
-.cv_create_next_step_inner {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-right: 20px;
-    padding-left: 20px;
-}
-
-.cv_create_next_step_inner .mb-3 {
-    font-size: 25px;
-}
-
-.street_streetnumber {
-    font-size: 25px;
-}
-
-.submit_button {
-    width: 100%;
-    height: 55px;
-    background-color: whitesmoke;
-    border-radius: 5px;
-    transition: background-color 0.5s ease;
-    font-size: 27px;
-}
-.submit_button:hover {
-    background-color: lightblue; 
+    margin-left: 15px;
 }
 
 .cat_picture_container {
@@ -220,6 +77,7 @@ body {
         font-size: 90px;
         text-align: center;
         color: whitesmoke;
+        font-family: 'Montserrat', sans-serif;
     }
 
 .cat_picture_outer {
@@ -234,21 +92,7 @@ body {
     height: 100vh; 
     }
 
-.create_cv_title h1{
-    padding-top: 20px;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 55px;
-    letter-spacing: 1px;
-    word-spacing: -0.6px;
-    font-weight: 700;
-    text-decoration: none solid rgb(68, 68, 68);
-    font-style: normal;
-    font-variant: small-caps;
-    text-transform: uppercase;
-    text-align: center;
-    color: antiquewhite;
 
-}
 
 .list_table .table {
     background-color: rgba(250, 209, 161,0.2);
@@ -260,3 +104,20 @@ body {
     text-align: center;
     align-items: center;
 }
+
+.btn-cat {
+    background: #a2a8d3;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    bottom: 60px;
+}
+.navbar-collapse {
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+.navbar{
+    height:50px;
+}
+

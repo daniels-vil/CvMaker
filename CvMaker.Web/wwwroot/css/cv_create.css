@@ -1,0 +1,68 @@
+﻿.create_button_wrapper {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.create_cv_title h1 {
+    padding-top: 20px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 55px;
+    letter-spacing: 1px;
+    word-spacing: -0.6px;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: uppercase;
+    text-align: center;
+    color: antiquewhite;
+    font-family: 'Roboto Serif', serif;
+}
+
+.btn-unique_create {
+    background-color: #818FB4;
+    border: none;
+    color: antiquewhite;
+    padding: 12px 24px;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid #304238;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    font-size: 28px;
+}
+
+    .btn-unique_create:hover {
+        background-color: #dbdbc8;
+        color: #333333;
+    }
+
+.create_wrapper {
+    background: #435585;
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    border: solid 1px grey;
+    margin: auto;
+    flex: auto;
+    border-radius: 40px;
+}
+
+.create_cv_content {
+    width: 400px; 
+    padding-top: 10px;
+    margin-bottom:30px;
+}
+
+    .create_cv_content .form-group .control-label {
+        padding-top: 6px;
+        padding-bottom: 5px;
+        font-size: 25px;
+        color: whitesmoke;
+        font-family: 'Roboto', sans-serif;
+    }

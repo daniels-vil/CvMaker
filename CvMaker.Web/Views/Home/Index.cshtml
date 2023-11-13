@@ -18,7 +18,6 @@
     </div>
 </div>
 
-<div class="ribbon">Your content</div> 
 
 
 
@@ -27,21 +26,16 @@
 <script>
     $(document).ready(function () {
         $('.btn-cat').click(function (e) {
-            e.preventDefault(); // Prevent button's default behavior
+            e.preventDefault();
 
-            // URL of the cat picture with a unique parameter to prevent caching
             var catPictureUrl = 'https://cataas.com/cat?unique=' + new Date().getTime();
 
-            // Create an <img> element
             var imgElement = $('<img>').attr('src', catPictureUrl);
 
-            // Append the <img> element to the catPictureContainer
             $('#catPictureContainer').empty().append(imgElement);
         });
 
-        // Handle form submission
         $('#catForm').submit(function (e) {
-            // Handle form submission logic if needed
         });
     });
 </script>

@@ -1,15 +1,16 @@
 ﻿@using Microsoft.DotNet.Scaffolding.Shared.Project
+
 @model CvItemModel
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 <div class="outer_cv_page">
-    <div class="inner_cv_page">
+    <div class="inner_cv_page" id="printable">
         <div>
             <div class="full_name_cvdetails">
                 <h2 id="fullname">
-                    CV information about @Model.FullName()
+                    @Model.FullName()
                 </h2>
             </div>
             <div class="avatar_photos">
@@ -17,13 +18,60 @@
             </div>
             <div>
                 <section class="cv_details">
-                    <p>E-mail address: @Model.Email</p>
+                    <p>E-mail: @Model.Email</p>
                     <p>Phone number: @Model.PhoneNumber</p>
                     <p>Address: @Model.FullAddress()</p>
                 </section>
             </div>
-            <div class="languages">
-                @if (Model.LanguageKnowledge.Count > 0)
+            <div class="cv_details__content">
+            <div class="cv_details__work">
+                @if (Model.Employments[0].NameOfCompany !=null)
+                {
+                    <p style="font-weight: bold">Work Experience</p>
+                    @for (int i = 0; i < Model.Employments.Count; i++)
+                    {
+                        <p>
+                            @Model.Employments[i].NameOfCompany
+                            @Model.Employments[i].JobPosition
+                            @Model.Employments[i].WorkLoad
+                        </p>
+                        <p>@Model.Employments[i].StartDate - @Model.Employments[i].EndDate</p>
+
+                    }
+                }
+            </div>
+
+            <div class="cv_details__skills">
+                @if(Model.Skills[0].SkillName !=null)
+                {
+                    <p style="font-weight: bold">Skills</p>
+
+                    @for (int i = 0; i < Model.Skills.Count; i++)
+                    {
+                        <p>@Model.Skills[i].SkillName - @Model.Skills[i].SkillDescription</p>
+                        
+                    }
+                }
+            </div>
+            
+            <div class="cv_details__education">
+                @if (Model.Educations[0].NameOfSchool !=null)
+                {
+                    <p style="font-weight: bold">Education</p>
+                    @for (int i = 0; i < Model.Educations.Count; i++)
+                    {
+                        <p>
+                            @Model.Educations[i].NameOfSchool -
+                            @Model.Educations[i].StudyProgram
+                        </p>
+                        <p>@Model.Educations[i].Status</p>
+                        <p>@Model.Educations[i].StudyStartDate - @Model.Educations[i].StudyEndDate</p>
+                        
+                    }
+                }
+            </div>
+            <div class="cv_details__languages">
+                @if (Model.LanguageKnowledge.Count > 1)
                 {
                     <p style="font-weight: bold">Languages</p>
                     @for (int i = 0; i < Model.LanguageKnowledge.Count; i++)
@@ -32,25 +80,26 @@
                     }
                 }
             </div>
-            <div class="cv_skills">
-                @for (int i = 0; i < Model.Skills.Count; i++)
-                {
-                    <p>@Model.Skills[i].SkillName</p>
-                    <p>@Model.Skills[i].SkillDescription</p>
-                }
-            </div>
-            <div class="cv_details">
-                <p style="font-weight: bold">Work Experience</p>
-                @for (int i = 0; i < Model.Employments.Count; i++)
-                {
-                    <p>@Model.Employments[i].NameOfCompany</p>
-                    <p>@Model.Employments[i].JobPosition</p>
-                    <p>@Model.Employments[i].WorkLoad</p>
-                    <p>@Model.Employments[i].StartDate</p>
-                    <p>@Model.Employments[i].EndDate</p>
-                }
             </div>
         </div>
     </div>
+   
+</div>
+<div class="print_block">
+    <button onclick="printDiv('printable')">Print</button>
 </div>
 
+
+<script>
+    function printDiv(printable) {
+        var printContents = document.getElementById(printable).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        // Restore the original content after printing
+        document.body.innerHTML = originalContents;
+    }
+</script>

@@ -60,14 +60,20 @@ namespace CvMaker.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(CvItemModel cvItem)
         {
-            var cv = _mapper.Map<CvItemModel, CurriculumVitae>(cvItem);
-            cv.Skills = new List<Skills> { new Skills() };
-            cv.Languages = new List<LanguageKnowledge> { new LanguageKnowledge() };
-            cv.Employments = new List<Employment> { new Employment() };
-            _cvService.Create(cv);
-            var cvId = cv.Id;
+            if (ModelState.IsValid)
+            {
+                var cv = _mapper.Map<CvItemModel, CurriculumVitae>(cvItem);
+                cv.Skills = new List<Skills> { new Skills() };
+                cv.Languages = new List<LanguageKnowledge> { new LanguageKnowledge() };
+                cv.Employments = new List<Employment> { new Employment() };
+                cv.Educations = new List<Education> { new Education() };
+                _cvService.Create(cv);
+                var cvId = cv.Id;
 
-            return RedirectToAction("CreateNextStep", new {id = cvId});
+                return RedirectToAction("CreateNextStep", new { id = cvId });
+            }
+
+            return View("Create", cvItem);
         }
 
         [HttpGet]
@@ -82,10 +88,63 @@ namespace CvMaker.Web.Controllers
         [HttpPost]
         public IActionResult CreateNextStep(CvItemModel cvItemModel)
         {
+            var existingCv = UpdateCvDetails(cvItemModel);
+            
+            _cvService.Update(existingCv);
+            
+            return RedirectToAction("List");
+        }
+
+        // GET: CvController/Edit/5
+        public ActionResult Edit(int id)
+        {
+            var cv = LoadCvWithRelatedEntities(id);
+            var cvItemModel = _mapper.Map<CurriculumVitae, CvItemModel>(cv);
+
+            return View(cvItemModel);
+        }
+
+        // POST: CvController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(CvItemModel cvItemModel)
+        {
+            var existingCv = UpdateCvDetails(cvItemModel);
+            _cvService.Update(existingCv);
+            return Redirect("List");
+        }
+
+
+        // POST: CvController/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(int id, IFormCollection collection)
+        {
+            var cvToDelete = _cvService.GetById(id);
+            if (cvToDelete != null)
+            {
+                _cvService.Delete(cvToDelete);
+            }
+
+            return RedirectToAction("List", "Cv");
+        }
+
+        private CurriculumVitae? LoadCvWithRelatedEntities(int cvId)
+        {
+            return _cvService.QueryById(cvId)
+                .Include(l => l.Languages)
+                .Include(s => s.Skills)
+                .Include(a => a.Address)
+                .Include(e => e.Educations)
+                .Include(em => em.Employments)
+                .SingleOrDefault();
+        }
+
+        private CurriculumVitae? UpdateCvDetails(CvItemModel cvItemModel)
+        {
             var existingCv = LoadCvWithRelatedEntities(cvItemModel.Id);
             if (existingCv != null)
             {
-                existingCv.Address.City = cvItemModel.Address.City;
                 existingCv.Address = new Address
                 {
                     City = cvItemModel.Address.City,
@@ -110,64 +169,30 @@ namespace CvMaker.Web.Controllers
                     LanguageLevel = lan.LanguageLevel,
                     Language = lan.Language,
                 }).ToList();
-
+                existingCv.Employments = cvItemModel.Employments.Select(em => new Employment
+                {
+                    CurriculumVitaeId = existingCv.Id,
+                    Id = em.Id,
+                    EndDate = em.EndDate,
+                    StartDate = em.StartDate,
+                    JobPosition = em.JobPosition,
+                    WorkLoad = em.WorkLoad,
+                    NameOfCompany = em.NameOfCompany,
+                }).ToList();
+                existingCv.Educations = cvItemModel.Educations.Select(ed => new Education
+                {
+                    NameOfSchool = ed.NameOfSchool,
+                    Faculty = ed.Faculty,
+                    StudyProgram = ed.StudyProgram,
+                    StudyEndDate = ed.StudyEndDate,
+                    StudyStartDate = ed.StudyStartDate,
+                    Status = ed.Status,
+                    CurriculumVitaeId = existingCv.Id,
+                    EducationalLevel = ed.EducationalLevel
+                }).ToList();
             }
-            _cvService.Update(existingCv);
-            
-            return RedirectToAction("List");
-        }
 
-        // GET: CvController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CvController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CvController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CvController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        private CurriculumVitae LoadCvWithRelatedEntities(int cvId)
-        {
-            return _cvService.QueryById(cvId)
-                .Include(l => l.Languages)
-                .Include(s => s.Skills)
-                .Include(a => a.Address)
-                .Include(e => e.Educations)
-                .Include(em => em.Employments)
-                .SingleOrDefault();
+            return existingCv;
         }
     }
 }

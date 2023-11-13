@@ -1,17 +1,19 @@
-﻿using CvMaker.Data.Migrations;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Text.RegularExpressions;
-using CvMaker.Core.Models;
+﻿using System.Text.RegularExpressions;
+using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
 namespace CvMaker.Web.Models
 {
     public class CvItemModel
     {
         public int Id { get; set; }
+        [Required(ErrorMessage="Fill out name field")]
         public string? Name { get; set; }
+        [Required(ErrorMessage = "Fill out E-mail field")]
         public string? Email { get; set; }
+        [Required(ErrorMessage = "Fill out last name field")]
         public string? LastName { get;  set; }
         public string? OtherName { get;  set; }
+        [Required(ErrorMessage = "Fill out phone number field")]
         public string? PhoneNumber { get;  set; }
 
         public List<LanguageKnowledgeViewModel> 
@@ -31,7 +33,7 @@ namespace CvMaker.Web.Models
         }
         public string FullAddress()
         {
-            var fullAddress = $"{this.Address.City} {this.Address.Street} {this.Address.StreetNumber}, {this.Address.PostCode}";
+            var fullAddress = $"{this.Address.City}, {this.Address.Street} {this.Address.StreetNumber}, {this.Address.PostCode}";
             return Regex.Replace(fullAddress, @"\s+", " ");
         }
     }

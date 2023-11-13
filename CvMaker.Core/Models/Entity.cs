@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CvMaker.Core.Models
+﻿namespace CvMaker.Core.Models
 {
     public abstract class Entity
     {

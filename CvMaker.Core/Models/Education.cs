@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CvMaker.Core.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace CvMaker.Core.Models;
 
@@ -13,7 +14,7 @@ public class Education : Entity
     [MaxLength(50)]
     public string? EducationalLevel { get; set; }
     [MaxLength(50)]
-    public string? Status { get; set; }
+    public EducationStatusEnum? Status { get; set; }
     [MaxLength(50)]
     public DateTime? StudyStartDate { get; set; }
     public DateTime? StudyEndDate { get; set; }

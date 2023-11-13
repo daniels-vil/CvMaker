@@ -11,38 +11,43 @@
 <div class="cv_create_next_step_outer">
     <div class="cv_create_next_step_inner">
         <div class="cv_next_step_title">
-            <h1>Welcome @Model.Name!</h1>
+            <h1>Welcome, @Model.Name!</h1>
         </div>
         @using (Html.BeginForm("CreateNextStep", "Cv", FormMethod.Post))
         {
             <div class="create_next_step_address">
                 @Html.HiddenFor(m => m.Id)
+                <div class="mb-3" hidden>
+                    @Html.LabelFor(n => n.Address.Country, "Country")
+                    @Html.TextBoxFor(n => n.Address.Country, new { @class = "form-control",maxlength = "50" })
+                </div>
                 <div class="mb-3">
                     @Html.LabelFor(n => n.Address.City, "City")
-                    @Html.TextBoxFor(n => n.Address.City, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(n => n.Address.PostCode, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(n => n.Address.City, new { @class = "form-control" ,maxlength = "50"})
                 </div>
                 <div class="mb-3">
                     @Html.LabelFor(n => n.Address.PostCode, "Post code")
-                    @Html.TextBoxFor(n => n.Address.PostCode, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(n => n.Address.PostCode, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(n => n.Address.PostCode, new { @class = "form-control" ,maxlength = "8"})
                 </div>
                 <div class="street_streetnumber">
                     <div class="form-group inline-block mb-3">
                         @Html.LabelFor(n => n.Address.Street, "Street")
-                        @Html.TextBoxFor(n => n.Address.Street, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(n => n.Address.Street, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(n => n.Address.Street, new { @class = "form-control",maxlength = "50" })
                     </div>
                     <div class="form-group inline-block ml-3 mb-3">
                         @Html.LabelFor(n => n.Address.StreetNumber, "Street number")
-                        @Html.TextBoxFor(n => n.Address.StreetNumber, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(n => n.Address.StreetNumber, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(n => n.Address.StreetNumber, new { @class = "form-control" ,maxlength = "10" })
                     </div>
                 </div>
             </div>
             <div class="skills_section">
-                <div class="skill_button">
-                    <button type="button" id="add-skill-btn">Add more skills</button>
+                    <div class="section_name">
+                    <p>Skill(s)</p>
+                    </div>
+                
+                <div class="add_button">
+                    <p>Add more</p>
+                    <button type="button" id="add-skill-btn">+</button>
                 </div>
                 <div id="skills-container">
                     @for (int i = 0; i < Model.Skills.Count; i++)
@@ -50,11 +55,11 @@
                         <div class="mb-3">
                             <div>
                                 @Html.LabelFor(n => n.Skills[i].SkillName, "Skill name")
-                                @Html.TextBoxFor(n => n.Skills[i].SkillName, new { @class = "form-control" })
+                                @Html.TextBoxFor(n => n.Skills[i].SkillName, new { @class = "form-control" ,maxlength = "30"})
                             </div>
                             <div>
                                 @Html.LabelFor(n => n.Skills[i].SkillDescription, "Please describe your skill")
-                                @Html.TextBoxFor(n => n.Skills[i].SkillDescription, new { @class = "form-control" })
+                                @Html.TextAreaFor(n => n.Skills[i].SkillDescription, new { @class = "form-control text_area", maxlength = "200" })
                             </div>
                         </div>
                     }
@@ -62,8 +67,12 @@
 
             </div>
             <div class="languages_section">
-                <div class="language_button">
-                    <button type="button" id="add-language-btn">Add more languages</button>
+                <div class="section_name">
+                    <p>Language(s)</p>
+                </div>
+                <div class="add_button">
+                    <p>Add more</p>
+                    <button type="button" id="add-language-btn">+</button>
                 </div>
                 <div id="languages_container">
                     @for (int i = 0; i < Model.LanguageKnowledge.Count; i++)
@@ -71,11 +80,11 @@
                         <div class="skill-item">
                             <div class="mb-3">
                                 @Html.LabelFor(m => m.LanguageKnowledge[i].Language, "Language")
-                                @Html.TextBoxFor(m => m.LanguageKnowledge[i].Language, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.LanguageKnowledge[i].Language, new { @class = "form-control",maxlength = "20" })
                             </div>
 
                             <div class="mb-3">
-                                @Html.LabelFor(m => m.LanguageKnowledge, "Language")
+                                @Html.LabelFor(m => m.LanguageKnowledge, "Language level")
                                 <select asp-for="@Model.LanguageKnowledge[i].LanguageLevel" asp-items="Html.GetEnumSelectList<KnowledgeEnum>()" required>
                                     <option value="" disabled selected hidden>Please select</option>
                                 </select>
@@ -87,35 +96,92 @@
             </div>
 
             <div class="employment_section">
+                <div class="section_name">
+                    <p>Employment</p>
+                </div>
+                <div class="add_button">
+                    <p>Add more</p>
+                    <button type="button" id="add-employment-btn">+</button>
+                </div>
                 <div class="employment_container">
                     @for (int i = 0; i < @Model.Employments.Count; i++)
                     {
                         <div class="employment_item">
                             <div class="mb-3">
                                 @Html.LabelFor(m => m.Employments[i].NameOfCompany, "Name of the company")
-                                @Html.TextBoxFor(m => m.Employments[i].NameOfCompany, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Employments[i].NameOfCompany, new { @class = "form-control" ,maxlength = "50"})
                             </div>
 
                             <div class="mb-3">
                                 @Html.LabelFor(m => m.Employments[i].JobPosition, "Job Position")
-                                @Html.TextBoxFor(m => m.Employments[i].JobPosition, new { @class = "form-control" })
-                            </div>
-                            
-                            <div class="mb-3">
-                                @Html.LabelFor(m => m.Employments[i].WorkLoad, "Work load")
-                                @Html.TextBoxFor(m => m.Employments[i].WorkLoad, new { @class = "form-control" })
+                                @Html.TextBoxFor(m => m.Employments[i].JobPosition, new { @class = "form-control",maxlength = "50" })
                             </div>
 
-                            <div class="mb-3">
-                                @Html.LabelFor(m => m.Employments[i].StartDate, "Start Date")
-                                @Html.TextBoxFor(m => m.Employments[i].StartDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                            <div class="mb-3" style="display:inline-block; margin-right:20px;" >
+                                @Html.LabelFor(m => m.Employments[i].WorkLoad, "Work load")
+                                @Html.TextBoxFor(m => m.Employments[i].WorkLoad, new { @class = "form-control",maxlength = "30" })
                             </div>
-                            <div class="mb-3">
+
+                            <div class="mb-3" style="display: inline-block; margin-right: 15px;">
+                                @Html.LabelFor(m => m.Employments[i].StartDate, "Start Date")
+                                @Html.TextBoxFor(m => m.Employments[i].StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                            </div>
+
+                            <div class="mb-3" style="display: inline-block">
                                 @Html.LabelFor(m => m.Employments[i].EndDate, "End Date")
-                                @Html.TextBoxFor(m => m.Employments[i].EndDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                @Html.TextBoxFor(m => m.Employments[i].EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
                             </div>
                         </div>
                     }
+                </div>
+                <div class="education_container">
+                    <div class="section_name">
+                        <p>Education</p>
+                    </div>
+                    <div class="add_button">
+                        <p>Add more</p>
+                        <button type="button" id="add-education-btn">+</button>
+                    </div>
+                    <div id="education-items-container">
+                    @for (int i = 0; i < @Model.Educations.Count; i++)
+                    {
+                        <div class="education_item">
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.Educations[i].NameOfSchool, "Institution name")
+                                @Html.TextBoxFor(m => m.Educations[i].NameOfSchool, new { @class = "form-control" ,maxlength = "50"})
+                            </div>
+
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.Educations[i].Faculty, "Faculty")
+                                @Html.TextBoxFor(m => m.Educations[i].Faculty, new { @class = "form-control" ,maxlength = "50"})
+                            </div>
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.Educations[i].StudyProgram, "Study program")
+                                @Html.TextBoxFor(m => m.Educations[i].StudyProgram, new { @class = "form-control",maxlength = "50" })
+                            </div>
+                            <div class="mb-3">
+                                @Html.LabelFor(m => m.Educations[i].EducationalLevel, "Degree")
+                                @Html.TextBoxFor(m => m.Educations[i].EducationalLevel, new { @class = "form-control",maxlength = "50" })
+                            </div>
+
+                            <div class="mb-3" style="display: inline-block; margin-right:15px">
+                                @Html.LabelFor(m => m.Educations[i].StudyStartDate, "Start Date")
+                                @Html.TextBoxFor(m => m.Educations[i].StudyStartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                            </div>
+
+                            <div class="mb-3" style="display: inline-block; margin-right:15px">
+                                @Html.LabelFor(m => m.Educations[i].StudyEndDate, "End Date")
+                                @Html.TextBoxFor(m => m.Educations[i].StudyEndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                            </div>
+                            <div class="mb-3" style="display:inline-block;">
+                                @Html.LabelFor(m => m.Educations[i].Status, "Status")
+                                <select asp-for="@Model.Educations[i].Status" asp-items="Html.GetEnumSelectList<EducationStatusEnum>()" required>
+                                    <option value="" disabled selected hidden>Please select</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+                    </div>
                 </div>
             </div>
 
@@ -127,6 +193,8 @@
     </div>
 </div>
 
+
+
 <script>
     document.getElementById("add-skill-btn").addEventListener("click", function () {
         var container = document.getElementById("skills-container");
@@ -134,40 +202,118 @@
         var newSkillItem = document.createElement("div");
         newSkillItem.className = "skill-item";
         newSkillItem.innerHTML = `<div class="mb-3">
-                                    <div>
-                                    <label for="Skills_${newIndex}__SkillName">Skill name</label>
-                                    <input type="text" id="Skills_${newIndex}__SkillName" name="Skills[${newIndex}].SkillName" class="form-control" />
-                                  </div>
-                                  <div>
-                                    <label for="Skills_${newIndex}__SkillDescription">Please describe your skill</label>
-                                    <input type="text" id="Skills_${newIndex}__SkillDescription" name="Skills[${newIndex}].SkillDescription" class="form-control" />
-                                  </div>
-                                      </div>`;
+                                            <div>
+                                            <label for="Skills_${newIndex}__SkillName">Skill name</label>
+                                            <input type="text" id="Skills_${newIndex}__SkillName" name="Skills[${newIndex}].SkillName" class="form-control" />
+                                          </div>
+                                          <div>
+                                            <label for="Skills_${newIndex}__SkillDescription">Please describe your skill</label>
+                                            <textarea id="Skills_${newIndex}__SkillDescription" name="Skills[${newIndex}].SkillDescription" class="form-control text_area" maxlength="200"></textarea>
+                                          </div>
+                                        </div>`;
         container.appendChild(newSkillItem);
     });
 </script>
 
-                                    
+
 <script>
     document.getElementById("add-language-btn").addEventListener("click", function () {
-        var container = document.getElementById("languages-container");
+        var container = document.getElementById("languages_container");
         var newIndex = container.children.length;
         var newLanguageItem = document.createElement("div");
         newLanguageItem.className = "language-item";
         newLanguageItem.innerHTML = `<div class="mb-3">
-                                        <label for="LanguageKnowledge_${newIndex}__Language">Language</label>
-                                        <input type="text" id="LanguageKnowledge_${newIndex}__Language" name="LanguageKnowledge[${newIndex}].Language" class="form-control" />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="LanguageKnowledge_${newIndex}__LanguageLevel">Language Level</label>
-                                        <select id="LanguageKnowledge_${newIndex}__LanguageLevel" name="LanguageKnowledge[${newIndex}].LanguageLevel" class="form-control" required>
-                                            <option value="" disabled selected hidden>Please select</option>
-                                            <option value="Beginner">Beginner</option>
-                                            <option value="Intermediate">Intermediate</option>
-                                            <option value="Excellent">Excellent</option>
-                                                <option value="Native">Native</option>
-                                        </select>
-                                    </div>`;
+                                            <label for="LanguageKnowledge_${newIndex}__Language">Language</label>
+                                            <input type="text" id="LanguageKnowledge_${newIndex}__Language" name="LanguageKnowledge[${newIndex}].Language" class="form-control" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="LanguageKnowledge_${newIndex}__LanguageLevel">Language Level</label>
+                                            <select id="LanguageKnowledge_${newIndex}__LanguageLevel" name="LanguageKnowledge[${newIndex}].LanguageLevel" class="form-control" required>
+                                                <option value="" disabled selected hidden>Please select</option>
+                                                <option value="Beginner">Beginner</option>
+                                                <option value="Intermediate">Intermediate</option>
+                                                <option value="Excellent">Excellent</option>
+                                                    <option value="Native">Native</option>
+                                            </select>
+                                        </div>`;
         container.appendChild(newLanguageItem);
+    });
+</script>
+
+
+<script>
+    document.getElementById("add-education-btn").addEventListener("click", function () {
+        var container = document.getElementById("education-items-container");
+        var newIndex = container.children.length;
+
+        var newEducationItem = document.createElement("div");
+        newEducationItem.className = "education_item";
+
+        newEducationItem.innerHTML = `<div class="mb-3">
+                                                <label for="Educations_${newIndex}__NameOfSchool">Institution name</label>
+                                                <input type="text" id="Educations_${newIndex}__NameOfSchool" name="Educations[${newIndex}].NameOfSchool" class="form-control" maxlength="50" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="Educations_${newIndex}__Faculty">Faculty</label>
+                                                <input type="text" id="Educations_${newIndex}__Faculty" name="Educations[${newIndex}].Faculty" class="form-control" maxlength="50" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="Educations_${newIndex}__StudyProgram">Study program</label>
+                                                <input type="text" id="Educations_${newIndex}__StudyProgram" name="Educations[${newIndex}].StudyProgram" class="form-control" maxlength="50" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="Educations_${newIndex}__EducationalLevel">Degree</label>
+                                                <input type="text" id="Educations_${newIndex}__EducationalLevel" name="Educations[${newIndex}].EducationalLevel" class="form-control" maxlength="50" />
+                                            </div>
+                                            <div class="mb-3" style="display: inline-block; margin-right: 15px;">
+                                                <label for="Educations_${newIndex}__StudyStartDate">Start Date</label>
+                                                <input type="date" id="Educations_${newIndex}__StudyStartDate" name="Educations[${newIndex}].StudyStartDate" class="form-control" />
+                                            </div>
+                                            <div class="mb-3" style="display: inline-block; margin-right: 15px;">
+                                                <label for="Educations_${newIndex}__StudyEndDate">End Date</label>
+                                                <input type="date" id="Educations_${newIndex}__StudyEndDate" name="Educations[${newIndex}].StudyEndDate" class="form-control" />
+                                            </div>
+                                            <div class="mb-3" style="display: inline-block;">
+                                                <label for="Educations_${newIndex}__Status">Status</label>
+                                                <select id="Educations_${newIndex}__Status" name="Educations[${newIndex}].Status" required>
+                                                    <option value="" disabled selected hidden>Please select</option>
+                                                    <!-- Add options for the status dropdown as needed -->
+                                                </select>
+                                            </div>`;
+
+        container.appendChild(newEducationItem);
+    });
+</script>
+
+<script>
+    document.getElementById("add-employment-btn").addEventListener("click", function () {
+        var container = document.querySelector(".employment_container");
+        var newIndex = container.children.length;
+
+        var newEmploymentItem = document.createElement("div");
+        newEmploymentItem.className = "employment_item";
+
+        newEmploymentItem.innerHTML = `<div class="mb-3">
+                                                <label for="Employments_${newIndex}__NameOfCompany">Name of the company</label>
+                                                <input type="text" id="Employments_${newIndex}__NameOfCompany" name="Employments[${newIndex}].NameOfCompany" class="form-control" maxlength="50" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="Employments_${newIndex}__JobPosition">Job Position</label>
+                                                <input type="text" id="Employments_${newIndex}__JobPosition" name="Employments[${newIndex}].JobPosition" class="form-control" maxlength="50" />
+                                            </div>
+                                            <div class="mb-3" style="display:inline-block; margin-right:20px;">
+                                                <label for="Employments_${newIndex}__WorkLoad">Work load</label>
+                                                <input type="text" id="Employments_${newIndex}__WorkLoad" name="Employments[${newIndex}].WorkLoad" class="form-control" maxlength="30" />
+                                            </div>
+                                            <div class="mb-3" style="display: inline-block; margin-right: 15px;">
+                                                <label for="Employments_${newIndex}__StartDate">Start Date</label>
+                                                <input type="date" id="Employments_${newIndex}__StartDate" name="Employments[${newIndex}].StartDate" class="form-control" />
+                                            </div>
+                                            <div class="mb-3" style="display: inline-block;">
+                                                <label for="Employments_${newIndex}__EndDate">End Date</label>
+                                                <input type="date" id="Employments_${newIndex}__EndDate" name="Employments[${newIndex}].EndDate" class="form-control" />
+                                            </div>`;
+
+        container.appendChild(newEmploymentItem);
     });
 </script>

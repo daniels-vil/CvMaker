@@ -1,0 +1,88 @@
+﻿.cv_create_next_step_outer {
+    background-color: #435585;
+    border: solid 1px gray;
+    border-radius: 20px;
+    margin: auto;
+    flex: auto;
+    justify-content: center;
+    max-width: 800px;
+    margin-top: 60px;
+}
+
+.cv_next_step_title h1 {
+    padding-top: 20px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 55px;
+    letter-spacing: 1px;
+    word-spacing: -0.6px;
+    font-weight: 700;
+    text-decoration: none solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: small-caps;
+    text-transform: uppercase;
+    text-align: center;
+    color: antiquewhite;
+    font-family: 'Roboto Serif', serif;
+    font-weight:500;
+}
+
+.cv_create_next_step_inner .mb-3 {
+    color: white;
+}
+
+.cv_create_next_step_inner {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+    .cv_create_next_step_inner .mb-3 {
+        font-size: 25px;
+    }
+
+.street_streetnumber {
+    font-size: 25px;
+}
+
+.section_name p {
+    font-size: 30px;
+    text-align: center;
+    color: whitesmoke;
+    border-bottom: solid 2px;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.add_button button {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: whitesmoke;
+    border-radius: 15px;
+}
+
+.add_button{
+    display:flex;
+    justify-content:right;
+}
+
+    .add_button p {
+        font-size: 23px;
+        font-family: 'Roboto', sans-serif;
+        padding-right: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: whitesmoke;
+    }
+
+
+    .text_area{
+        max-height:150px;
+        height:auto;
+        font-size:20px;
+    }

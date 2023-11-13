@@ -1,0 +1,24 @@
+﻿.cv_edit_wrap {
+    background-color: #435585;
+    width: 600px;
+    display: flex;
+    padding: 25px 20px;
+    border-radius: 20px;
+}
+
+.cv_edit_outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit_cv_title {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.cv_edit_wrap .mb-3 {
+    color: white;
+    font-size: 20px;
+}
